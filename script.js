@@ -35,3 +35,35 @@ document.getElementById('cep').addEventListener('keypress', function(e) {
         consultarCEP();
     }
 });
+
+function salvarDados() {
+    const nome = document.getElementById('nome').value.trim();
+    const logradouro = document.getElementById('logradouro').value;
+    const complemento = document.getElementById('complemento').value;
+    const bairro = document.getElementById('bairro').value;
+    const localidade = document.getElementById('localidade').value;
+
+    if (!nome || !logradouro || !bairro || !localidade) {
+        alert("Preencha o nome e consulte um CEP válido antes de salvar.");
+        return;
+    }
+
+    const dados = {
+        nome,
+        logradouro,
+        complemento,
+        bairro,
+        localidade
+    };
+
+    localStorage.setItem("dadosUsuario", JSON.stringify(dados));
+
+    document.getElementById('dadosSalvos').style.display = "block";
+    document.getElementById('salvoNome').innerText = `Nome: ${dados.nome}`;
+    document.getElementById('salvoLogradouro').innerText = `Logradouro: ${dados.logradouro}`;
+    document.getElementById('salvoComplemento').innerText = `Complemento: ${dados.complemento}`;
+    document.getElementById('salvoBairro').innerText = `Bairro: ${dados.bairro}`;
+    document.getElementById('salvoLocalidade').innerText = `Cidade/Estado: ${dados.localidade}`;
+}
+
+document.getElementById('salvarBtn').addEventListener('click', salvarDados);
